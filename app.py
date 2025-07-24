@@ -49,8 +49,6 @@ from paypalserversdk.models.card_attributes import CardAttributes
 
 from paypalserversdk.models.card_verification import CardVerification
 
-from paypalserversdk.models.card_verification_method import CardVerificationMethod
-
 from paypalserversdk.api_helper import ApiHelper
 
 
@@ -162,4 +160,4 @@ def  capture_order(order_id: str):
 app.mount('/', StaticFiles(directory=".", html=True), name="src")
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8080)
