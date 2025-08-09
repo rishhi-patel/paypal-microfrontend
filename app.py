@@ -139,9 +139,9 @@ async def create_order(request: Request):
 
                         amount=AmountWithBreakdown(
 
-                            currency_code="USD",
+                            currency_code=cart[0]['currency'],
 
-                            value="100",
+                            value=cart[0]['amount'],
 
                         ),
 

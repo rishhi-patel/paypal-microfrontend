@@ -18,6 +18,8 @@ class PayPal extends HTMLElement {
     async connectedCallback() {
         const res = await fetch(import.meta.url.replace("index.js", "clientid"));
         const oClient = await res.json();
+        const nAmount = this.getAttribute("amount");
+        const sCurrency = this.getAttribute("currency");
         this.innerHTML = `
         <div id="paypal-button-container"></div>
 
@@ -25,7 +27,7 @@ class PayPal extends HTMLElement {
          `
         let paypal;
         try {
-            paypal = await loadScript({ clientId: oClient.clientid });
+            paypal = await loadScript({ clientId: oClient.clientid, currency: sCurrency });
             paypal.resultMessage = (sMessage) => document.querySelector("#result-message").innerHTML = sMessage;
         } catch (error) {
             console.error("failed to load the PayPal JS SDK script", error);
@@ -48,7 +50,7 @@ class PayPal extends HTMLElement {
 
                     message: {
 
-                        amount: this.getAttribute("amount"),
+                        amount: nAmount,
 
                     },
 
@@ -79,6 +81,10 @@ class PayPal extends HTMLElement {
                                             id: "YOUR_PRODUCT_ID",
 
                                             quantity: "YOUR_PRODUCT_QUANTITY",
+
+                                            amount: nAmount,
+
+                                            currency: sCurrency,
 
                                         },
 
