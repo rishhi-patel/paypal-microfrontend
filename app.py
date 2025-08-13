@@ -45,7 +45,7 @@ app = FastAPI(title="PayPal + React + OTel")
 
 # ------------------ OpenTelemetry setup ------------------
 OTLP_TRACES_URL = os.getenv(
-    "OTEL_EXPORTER_OTLP_TRACES_ENDPOINT", "http://10.172.27.45:4318/v1/traces")
+    "OTEL_EXPORTER_OTLP_TRACES_ENDPOINT", "http://4.204.69.86:4318/v1/traces")
 
 resource = Resource.create({
     ResourceAttributes.SERVICE_NAME: "fastapi-paypal-backend",
@@ -79,7 +79,7 @@ paypal_client: PaypalServersdkClient = PaypalServersdkClient(
 
 orders_controller: OrdersController = paypal_client.orders
 payments_controller: PaymentsController = paypal_client.payments  # kept for future use
-COLLECTOR_TRACES = "http://10.172.27.45:4318/v1/traces"
+COLLECTOR_TRACES = "http://4.204.69.86:4318/v1/traces"
 
 
 @app.post("/otel/v1/traces")
@@ -165,4 +165,4 @@ async def spa_fallback(full_path: str, request: Request):
 # ------------------ Entrypoint ------------------
 if __name__ == "__main__":
     # Use 0.0.0.0 if running inside a container; otherwise localhost is fine
-    uvicorn.run(app, host="0.0.0.0", port=8080)
+    uvicorn.run(app, host="localhost", port=8080)

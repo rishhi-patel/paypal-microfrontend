@@ -8,7 +8,10 @@ export default defineConfig({
     host: true,
     port: 5173,
     strictPort: true,
-    allowedHosts: ["."],
+    allowedHosts: [
+      ".",                  // keep localhost
+      "codespace.exotrend.live", // allow your Codespace domain
+    ],
     proxy: {
       "/clientid": "http://localhost:8080",
       "/orders": "http://localhost:8080",

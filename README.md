@@ -22,13 +22,13 @@ python app.py
 
 ## What changed in the frontend (migration notes)
 
-We replaced the legacy HTML/Custom Elements app with **Vite + React**, retained **PayPal Checkout**, and wired up **OpenTelemetry Web**. The React production build goes to `frontend/dist` and is served by **FastAPI**. Browser traces are shipped through a **same-origin OTLP proxy** at `/otel/v1/traces`, which the backend forwards to `http://10.172.27.45:4318`. This design sidesteps CORS and mixed-content problems, and it plays nicely with Cloudflared.
+We replaced the legacy HTML/Custom Elements app with **Vite + React**, retained **PayPal Checkout**, and wired up **OpenTelemetry Web**. The React production build goes to `frontend/dist` and is served by **FastAPI**. Browser traces are shipped through a **same-origin OTLP proxy** at `/otel/v1/traces`, which the backend forwards to `http://4.204.69.86:4318`. This design sidesteps CORS and mixed-content problems, and it plays nicely with Cloudflared.
 
 **Key bits**
 
 - React components: `Year`, `PayPalButton`, `MarkdownToHtml`
 - Auto-instrumentation for page load, clicks, fetch/XHR
-- FastAPI proxy → OTLP collector (`http://10.172.27.45:4318`)
+- FastAPI proxy → OTLP collector (`http://4.204.69.86:4318`)
 - Public exposure via a **Cloudflared** named tunnel
 
 ## Running it locally
@@ -161,14 +161,14 @@ curl -I https://paypal.exotrend.live/
 curl -I https://paypal.exotrend.live/clientid
 ```
 
-> Keep the **server-side OTLP proxy** at `POST /otel/v1/traces` so the browser posts to the same origin. The backend forwards to `http://10.172.27.45:4318/v1/traces`—no CORS or TLS drama.
+> Keep the **server-side OTLP proxy** at `POST /otel/v1/traces` so the browser posts to the same origin. The backend forwards to `http://4.204.69.86:4318/v1/traces`—no CORS or TLS drama.
 
 ---
 
 ## Environment variables
 
 - **Frontend:** `VITE_OTLP_BASE` (defaults to `/otel`)
-- **Backend:** `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT` (defaults to `http://10.172.27.45:4318/v1/traces`)
+- **Backend:** `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT` (defaults to `http://4.204.69.86:4318/v1/traces`)
 - **Payments:** `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET` (set these in `.env` for FastAPI)
 
 ---
