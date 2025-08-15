@@ -63,7 +63,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-otel_base = "http://4.204.69.86:4318"
+otel_base = os.getenv("OTEL_ENDPOINT", "http://4.204.69.86:4318")
 otel_traces = otel_base.rstrip("/") + "/v1/traces"
 otel_metrics = otel_base.rstrip("/") + "/v1/metrics"
 otel_logs = otel_base.rstrip("/") + "/v1/logs"
