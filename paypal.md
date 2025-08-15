@@ -1,5 +1,3 @@
-## x-paypal
-
 ```
 <x-paypal amount="100" />
 ```
