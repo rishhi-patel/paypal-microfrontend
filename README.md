@@ -1,4 +1,4 @@
-# FastAPI × React Microfrontends with OpenTelemetry
+# FastAPI Microfrontends with OpenTelemetry
 
 ## Running it locally
 
@@ -9,22 +9,21 @@
 python3 -m venv .venv
 source .venv/bin/activate
 
+# Install dependencies
 pip install -r requirements.txt
-uvicorn app:app --host 0.0.0.0 --port 8080
-```
 
-Quick checks:
-
-```bash
-which python  # .../.venv/bin/python
-python -V
+# Run the server
+python app.py
 ```
 
 ## Environment variables
+```bash
+PAYPAL_CLIENT_SECRET=
+PAYPAL_CLIENT_ID=
+OTEL_ENDPOINT=
+```
+<img width="2554" height="1596" alt="image" src="https://github.com/user-attachments/assets/c0ec4417-586c-455d-8cc4-2418ab660b45" />
 
-- **Frontend:** `VITE_OTLP_BASE` (defaults to `/otel`)
-- **Backend:** `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT` (defaults to `http://4.204.69.86:4318/v1/traces`)
-- **Payments:** `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET` (set these in `.env` for FastAPI)
 
 ![1755230308139](image/README/1755230308139.png)
 
